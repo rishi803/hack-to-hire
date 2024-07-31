@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+# Flight Status and Notifications
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a full-stack application that provides real-time flight status updates and notifications to passengers. It features a web frontend built with React, a backend API built with Node.js and Express, and a MongoDB database. Notifications are sent using Firebase Cloud Messaging (FCM).
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Frontend Setup](#frontend-setup)
+- [Backend Setup](#backend-setup)
+- [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+- [Firebase Setup](#firebase-setup)
+- [Functionality](#functionality)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Real-Time Updates:** Display current flight status including delays, cancellations, and gate changes.
+- **Push Notifications:** Send notifications for flight status changes via FCM.
+- **CRUD Operations:** Add, view, and update flight details.
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Frontend:** HTML, CSS, React.js
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Notifications:** Firebase Cloud Messaging (FCM)
+- **Message Broker (Optional):** Kafka (for advanced features)
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Node.js and npm installed on your machine.
+- MongoDB server running locally or remotely.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Clone the Repository
 
-### `npm run eject`
+```bash
+git clone https://github.com/your-repo/flight-status-notifications.git
+cd flight-status-notifications
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Frontend Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Navigate to the frontend directory:**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    ```bash
+    cd frontend
+    ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. **Install dependencies:**
 
-## Learn More
+    ```bash
+    npm install
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **Start the React development server:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ```bash
+    npm start
+    ```
 
-### Code Splitting
+## Backend Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Navigate to the backend directory:**
 
-### Analyzing the Bundle Size
+    ```bash
+    cd backend
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. **Install dependencies:**
 
-### Making a Progressive Web App
+    ```bash
+    npm install
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3. **Start the backend server:**
 
-### Advanced Configuration
+    ```bash
+    npm start
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Running the Application
 
-### Deployment
+1. **Ensure MongoDB is running.**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. **Start the backend server (`backend` directory):**
 
-### `npm run build` fails to minify
+    ```bash
+    npm start
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. **Start the React frontend (`frontend` directory):**
+
+    ```bash
+    npm start
+    ```
+
+4. **Open your browser and navigate to `http://localhost:3001` to see the application.**
+
+## API Endpoints
+
+### Get All Flights
+
+- **URL:** `/api/flights`
+- **Method:** `GET`
+- **Description:** Retrieve all flight details.
+- **Response:** JSON array of flight objects.
+
+### Add a New Flight
+
+- **URL:** `/api/flights`
+- **Method:** `POST`
+- **Description:** Add a new flight.
+- **Body:**
+    ```json
+    {
+      "flightNumber": "BB123",
+      "airline": "Lufthansa",
+      "status": "Delayed",
+      "gate": "B1",
+      "scheduledTime": "2024-08-11T10:00:00",
+      "updatedTime": "2024-08-11T10:00:00"
+    }
+    ```
+- **Response:** JSON object of the newly created flight.
+
+### Update Flight Status
+
+- **URL:** `/api/flights/:id`
+- **Method:** `PATCH`
+- **Description:** Update the status of an existing flight.
+- **Body:**
+    ```json
+    {
+      "status": "On Time",
+      "gate": "B2"
+    }
+    ```
+- **Response:** JSON object with the updated flight details.
+
+## Firebase Setup
+
+1. **Create a Firebase project:**
+
+    - Go to [Firebase Console](https://console.firebase.google.com/).
+    - Create a new project.
+
+2. **Add Firebase to your web app:**
+
+    - Navigate to Project Settings > General > Your apps.
+    - Register your app and copy the Firebase config.
+
+3. **Add Firebase config to your frontend:**
+
+    - Update `frontend/src/firebase.js` with your Firebase configuration.
+
+## Functionality
+
+- **Add Flights:** A form on the frontend allows users to input flight details and submit them to the backend. The new flight data is saved in the MongoDB database.
+
+- **Update Flight Status:** Users can update flight status through a form or directly via API requests. The updated status is reflected in the MongoDB database and in the UI.
+
+- **Real-Time Notifications:** When flight statuses are updated, notifications are sent to users via Firebase Cloud Messaging. Notifications appear on the web screen with details about the previous and updated flight status.
+
+- **Live Data Display:** The frontend fetches flight data from the backend API and displays it in a table. Any changes to the flight status are updated in real-time.
+
+## Troubleshooting
+
+- **CORS Issues:** Ensure `cors` middleware is added to your Express server and configured correctly.
+
+- **MongoDB Connection Issues:** Verify MongoDB server is running and connection string is correct.
+
+- **Firebase Issues:** Check Firebase configuration and permissions.
