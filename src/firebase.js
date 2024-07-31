@@ -1,18 +1,20 @@
-import firebase from 'firebase/app';
-import 'firebase/messaging';
+// frontend/src/firebase.js
+import { initializeApp } from 'firebase/app';
+import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA8PD8qhaAFaaCipTdVWz3BsjCL-o6CzYA",
-    authDomain: "indigo-56aea.firebaseapp.com",
-    projectId: "indigo-56aea",
-    storageBucket: "indigo-56aea.appspot.com",
-    messagingSenderId: "735037483740",
-    appId: "1:735037483740:web:5dd1f9920b3e671fe8a219",
-    measurementId: "G-H7MELVCLFB"
-  };
+ apiKey:String( process.env.REACT_APP_FIREBASE_API_KEY),
+  authDomain:String( process.env.REACT_APP_FIREBASE_AUTH_DOMAIN),
+  projectId:String( process.env.REACT_APP_FIREBASE_PROJECT_ID),
+  storageBucket: String(process.env.REACT_APP_FIREBASE_STORAGE_BUCKET),
+  messagingSenderId:String( process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID),
+  appId:String( process.env.REACT_APP_FIREBASE_APP_ID),
+  measurementId:String( process.env.REACT_APP_FIREBASE_MEASUREMENT_ID)
+};
 
-firebase.initializeApp(firebaseConfig);
 
-const messaging = firebase.messaging();
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
 
-export { messaging };
+export { messaging, getToken, onMessage };
