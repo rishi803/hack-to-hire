@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:3000/api/flights')
       .then(response => response.json())
-      .then(data => setFlights(data)) // Fetch actual data from API
+      .then(data => setFlights(data)) 
       .catch(err => console.error('Fetch error:', err));
   }, []);
 
@@ -20,7 +20,7 @@ function App() {
         getToken(messaging)
           .then(token => {
             console.log('FCM Token:', token);
-            // You may want to send this token to your server for notifications
+            // Can send this token to your server for notifications
           })
           .catch(err => console.error('Error getting FCM token:', err));
       } else {
@@ -31,7 +31,7 @@ function App() {
     // Handle incoming messages
     onMessage(messaging, (payload) => {
       console.log('Message received. ', payload);
-      // You can display notifications or update UI here
+      // We can display notifications or update UI here
     });
   }, []);
 
