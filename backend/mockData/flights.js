@@ -18,6 +18,14 @@ const mockFlights = [
     scheduledTime: new Date('2024-08-11T10:00:00'),
     updatedTime: new Date('2024-08-11T10:00:00')
   },
+  {
+    flightNumber: 'CC123',
+    airline: 'Air India',
+    status: 'Cancelled',
+    gate: 'B1',
+    scheduledTime: new Date('2024-08-11T10:00:00'),
+    updatedTime: new Date('2024-08-11T10:00:00')
+  }
   // Add more mock flights here
 ];
 
