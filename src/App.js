@@ -42,7 +42,7 @@ function App() {
         <table>
           <thead>
             <tr>
-              <th>{process.env.REACT_APP_FIREBASE_API_KEY}</th>
+              <th>Flight</th>
               <th>Airline</th>
               <th>Status</th>
               <th>Gate</th>
